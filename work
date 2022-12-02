@@ -12,9 +12,21 @@ session = ConnectHandler(**csr1kv)
 session.enable
 
 cmd_list = [
-'config terminal',
+'configure terminal',
 'interface loopback 0',
 'ip address 1.1.1.1 255.255.255.0',
+
+'router ospf 1',
+'network 1.1.1.1 255.255.255.0 area 0',
+'network 2.2.2.2 255.255.255.0 area 0',
+'network 192.168.56.101 255.255.255.0 area 0',
+
+'router eigrp 1',
+'network 192.168.56.0',
+'end',
+'wr',
+
+
 ]
 command = session.send_config_set(cmd_list)
 print(command)
