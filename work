@@ -9,6 +9,13 @@ csr1kv = {
 
 session = ConnectHandler(**csr1kv)
 session.enable
-command = session.send_command('show ip int brief')
+cmd_list = [
+    'show ip int brief',
+    'show hostname',
+    'show arp',
+    'show cpd neighbors',
+]
+command = session.send_config_set(miko)
 print(command)
 session.exit_enable_mode
+
