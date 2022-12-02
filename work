@@ -1,3 +1,4 @@
+
 from netmiko import ConnectHandler
 
 csr1kv = {
@@ -9,13 +10,12 @@ csr1kv = {
 
 session = ConnectHandler(**csr1kv)
 session.enable
+
 cmd_list = [
-    'show ip int brief',
-    'show hostname',
-    'show arp',
-    'show cpd neighbors',
+'config terminal',
+'interface loopback 0',
+'ip address 1.1.1.1 255.255.255.0',
 ]
-command = session.send_config_set(miko)
+command = session.send_config_set(cmd_list)
 print(command)
 session.exit_enable_mode
-
